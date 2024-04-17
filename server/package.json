@@ -1,0 +1,29 @@
+{
+    "name": "atlas_starter_nodejs",
+    "version": "1.0.0",
+    "description": "MongoDB Node.js driver and Atlas Starter Application",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app",
+        "dev": "nodemon app"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mongodb-university/atlas_starter_nodejs.git"
+    },
+    "author": "chris.cho@mongodb.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mongodb-university/atlas_starter_nodejs/issues"
+    },
+    "homepage": "https://github.com/mongodb-university/atlas_starter_nodejs#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "mongodb": "^3.5.9"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    }
+}
