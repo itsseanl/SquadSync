@@ -3,19 +3,22 @@ const express = require("express");
 const path = require('path');
 const cors = require('cors');
 const { rmSync } = require("fs");
+var bodyParser = require('body-parser')
 
 require('dotenv').config()
 
 const app = express();
 const uri = `mongodb+srv://itsseanl:${process.env.REACT_APP_MONGODB_PASS}@squadsync.6q7sw9l.mongodb.net/?retryWrites=true&w=majority&appName=squadsync`;
 
-app.get('/api/sendmessage', (req, res) => {
+app.use(bodyParser.json());
+app.post('/api/sendmessage', (req, res) => {
     const date = new Date().toISOString();
-    req.body ={
-        "content" : "this is a test message",
-        "timestamp" : date,
-        "author" : "seanl"
-    };
+    console.log(req.body);
+    // req.body ={
+    //     "content" : "this is a test message",
+    //     "timestamp" : date,
+    //     "author" : "seanl"
+    // };
     msgToServer(req.body);
 
     //TODO: insertone to mongodb 

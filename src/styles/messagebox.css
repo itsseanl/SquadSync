@@ -1,0 +1,22 @@
+.input{
+    width:100%;
+    display:flex;
+    flex-wrap:nowrap;
+    height:10vh;
+}
+.input > textarea,
+.input > button{
+    border:1px solid #333;
+    margin:0; 
+    padding:0;
+    display:block;  
+}
+.input > textarea{
+    width:90%;
+    height:100%;
+    resize:none;
+}
+.input > button{
+    width:10%;
+    height:100%;
+}

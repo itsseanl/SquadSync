@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import MessageStream  from './components/MessageStream';
+import MessageBox from './components/MessageBox';
 function App() {
   
   return (
@@ -17,12 +18,9 @@ function App() {
         </a>
       </header>
       <div className="chatbox">
-      </div>
-      <div className="input">
-        <textarea id="chatInput"></textarea>
         <MessageStream />
-        <button id="submit-chat">Submit</button>
       </div>
+     <MessageBox />
     </div>
   );
 }

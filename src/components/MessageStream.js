@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import "../styles/messagestream.css";
+
 
 export default function MessageStream() {
   const [msgStream, setMsgStream] = useState([]);
   // console.table(msgStream);
 
   useEffect(
-    (elem) => {
+    () => {
       const eventSource = new EventSource("/api/messagestream");
       eventSource.onopen = () => console.log("connection opened");
       eventSource.onerror = (e) => {
@@ -30,12 +32,17 @@ export default function MessageStream() {
   );
 
   return (
-    <div className="message">
-      <p>
+    <div className="message-container">
+     
         {msgStream.map((msg) => {
-          return msg.fullDocument.timestamp;
+          return (
+            <div className="message">
+            <p>{msg.fullDocument.author}: {msg.fullDocument.content}</p>
+            <p className="message-time">{msg.fullDocument.timestamp}</p>
+            </div>
+          ) 
         })}
-      </p>
+     
     </div>
   );
 }
