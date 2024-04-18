@@ -1,22 +1,126 @@
 .input{
-    width:100%;
+margin:20px 0px;
+position:relative; 
+padding:15px;
+width:calc(100vw - 80px);
+display:flex;
+flex-wrap:nowrap;
+/* background-color:rgba(0,0,0,0.7); */
+background-color: #282c34;
+height:fit-content;
+min-height:10vh;
+max-height:30vh;
+}
+
+   
+form{
+    position:relative;
+    height:100%;
+   
     display:flex;
     flex-wrap:nowrap;
-    height:10vh;
+    width:100%;
+    gap:10px;
+
 }
-.input > textarea,
-.input > button{
+.input > form > label > textarea,
+.input > form >  button {
     border:1px solid #333;
     margin:0; 
     padding:0;
     display:block;  
 }
-.input > textarea{
-    width:90%;
-    height:100%;
-    resize:none;
+ label {
+  position:absolute;
+  top:0;
+  left:0;
+  padding:5px;
+
 }
-.input > button{
+.text-box-wrapper{
+    position:relative;
+    min-height:50px;
+    height:fit-content;
+    width:90%;
+    border-radius:500px;
+    background-color:#fff;
+}
+#emojis{
+    position:absolute;
+    right:15px;
+    top:0;
+    bottom:0;
+    margin:auto;
+    height:35px;
+    width:35px;
+    border-radius:50%;
+    border:none;
+    background-color: #303030;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+
+}
+
+#addMedia{
+    position:absolute;
+    left:15px;
+    top:0;
+    bottom:0;
+    margin:auto;
+    height:35px;
+    width:35px;
+    border-radius:50%;
+    border:none;
+    background-color: #303030;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#addMedia svg {
+    height:20px;
+    width:20px;
+}
+
+#addMedia svg path{
+    fill: #fff;
+}
+#emojis svg{
+    height:20px;
+    width:20px;
+
+}
+#emojis svg path{
+    fill: #fff;
+}
+textarea#chatInput{
+    box-sizing:border-box;
+    width:calc(100% - 105px);
+   min-height:45px;
+   height:auto;
+    outline:unset;
+  border:none;
+    resize:none;
+    font-size:16px;
+    background-color:unset;
+    padding:12px 65px 0px 45px;
+
+}
+#submitChat{
     width:10%;
     height:100%;
+    border-radius:50%;
+    width:50px;
+    height:50px;
+    /* background-color: #AF4F00; */
+    background-color: #F9811D;
+    /* background-color: #D36000; */
+
 }
+
+#submitChat svg{
+    width:20px;
+    height:20px;
+}
+

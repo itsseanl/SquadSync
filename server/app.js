@@ -26,9 +26,9 @@ app.post('/api/sendmessage', (req, res) => {
     const message = req.body
     res.json(message);
 });
-app.use(cors());
 
-app.get('/api/messagestream', async (req, res) =>{
+app.use(cors());
+app.get('/api/messagestream', async (req, res) => {
     res.status(200)
     .set({ "Content-Type"  : "text/event-stream"
          , "Cache-Control" : "no-cache"
@@ -52,8 +52,43 @@ let msg = '';
     });
    
 });
-const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.get('/api/messagehistory', async (req, res) => {
+  const client = new MongoClient(uri, {useUnifiedTopology: true});
+  await client.connect();
+  const dbName = "Messages";
+  const collectionName = "messages_home";
+  const database = client.db(dbName);
+  const collection = database.collection(collectionName);
 
+  try {
+    //find, newest to oldest, limit 50
+    const cursor = await collection.find().sort({timestamp:-1}).limit(50);
+    let msgs = [];
+    await cursor.forEach(msg => {
+      // console.log(`${msg}`);
+      // console.log(`${msg.message.time}: ${msg.message.content}`);
+      const message = {
+        "fullDocument": {
+          "author": msg.author,
+          "content": msg.content,
+          "timestamp": msg.timestamp
+        }
+    };
+      console.log(message);
+      msgs.push(message);
+    });
+    client.close();
+    msgs.reverse()
+
+    res.json(JSON.stringify(msgs));
+    // add a linebreak
+  } catch (err) {
+    console.error(`Something went wrong trying to find the documents: ${err}\n`);
+  }
+});
+
+const PORT = process.env.PORT || 5000;
 
 async function msgToServer(msg){
     const client = new MongoClient(uri);
@@ -68,6 +103,7 @@ async function msgToServer(msg){
     } catch (err) {
         console.error(`Something went wrong trying to find the documents: ${err}\n`);
     }
+    client.close();
 }
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 

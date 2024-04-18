@@ -17,10 +17,13 @@ function App() {
           squadsync
         </a>
       </header>
+      <div className="wrapper">
+
       <div className="chatbox">
         <MessageStream />
       </div>
      <MessageBox />
+      </div>
     </div>
   );
 }

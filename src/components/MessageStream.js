@@ -6,6 +6,28 @@ export default function MessageStream() {
   const [msgStream, setMsgStream] = useState([]);
   // console.table(msgStream);
 
+  useEffect(() => {
+   getHistory()
+  },[]);
+   
+  async function getHistory(){
+    await fetch('/api/messagehistory', {
+      method: "get", 
+      mode: "cors",
+      headers: {"Content-Type": 'application/json'},
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      console.log(res.fullDocument);
+      setMsgStream([...msgStream, ...JSON.parse(res)]);
+    })
+    .then(console.log(msgStream))
+    .catch((e) => console.log(e));
+
+  }
+
+
   useEffect(
     () => {
       const eventSource = new EventSource("/api/messagestream");
@@ -27,16 +49,19 @@ export default function MessageStream() {
 
         }
       };
+      var msgContainer = document.getElementById('msgContainer');
+      msgContainer.scrollTop = msgContainer.scrollHeight;
     },
     [msgStream]
   );
 
   return (
-    <div className="message-container">
+    <div id="msgContainer" className="message-container">
      
         {msgStream.map((msg) => {
           return (
             <div className="message">
+              {/* <p>{msg}</p> */}
             <p>{msg.fullDocument.author}: {msg.fullDocument.content}</p>
             <p className="message-time">{msg.fullDocument.timestamp}</p>
             </div>
