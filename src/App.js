@@ -1,9 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import MessageStream  from './components/MessageStream';
-import MessageBox from './components/MessageBox';
+import logo from "./logo.svg";
+import "./App.css";
+import MessageStream from "./components/MessageStream";
+import MessageBox from "./components/MessageBox";
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
+
 function App() {
-  
+  const { user, isAuthenticated, isLoading } = useAuth0();
   return (
     <div className="App">
       <header className="App-header">
@@ -16,13 +20,20 @@ function App() {
         >
           squadsync
         </a>
+        <LoginButton />
+        <LogoutButton />
       </header>
       <div className="wrapper">
-
-      <div className="chatbox">
-        <MessageStream />
-      </div>
-     <MessageBox />
+        {isAuthenticated ? (
+          <div className="authed">
+            <div className="chatbox">
+              <MessageStream />
+            </div>
+            <MessageBox />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
